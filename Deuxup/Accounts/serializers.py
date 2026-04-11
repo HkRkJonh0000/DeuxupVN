@@ -37,7 +37,11 @@ class UserSerializers(serializers.ModelSerializers):
             raise serializers.ValidationError (
                 {"role" : "Bạn không đủ quyền truy cập."}
             )
-        return attrs
+        return attrs.pop("password_confirm")
+
+        def validate_password(self, value):
+            if len(value) < 8:
+                raise serializers.ValidationError("Mật khẩu không đủ 8 ký tự.")
 
         def create(self, validated_data):
             validated_data.pop("password_confirm")
@@ -55,4 +59,8 @@ class UserSerializers(serializers.ModelSerializers):
                 return User.objects.is_matched(
                     email = email,
                     password = password,
+                    username = email,
+                    role = role,
+                    is_active = True,
                 )
+            
