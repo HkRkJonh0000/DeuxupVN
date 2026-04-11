@@ -1,0 +1,11 @@
+Viết code triển khai kế hoạch bao gồm:
+
+1 - Auth + user + role
+2 - Seller profile + CRUD sản phẩm
+3 - Giỏ hàng + tạo order (pending)
+4 - Tích hợp thanh toán + webhook + cập nhật trạng thái đơn
+5 - Màn đơn hàng khách + seller
+6 - Shipments + carrier API + event log
+7 - WebSocket/SSE + trang tracking
+8 - Email + admin cơ bản
+9 - Hardering bảo mật + test + deploy

@@ -1,0 +1,37 @@
+khách hàng
+cung cấp
+thu phí 25% trên 1 sản phẩm (rang buộc đổi trả)
+luồng tiền: 
+
+1 - thu full tiền = khách hàng
+2 - full tiền = shop / cung cấp
+
+chức năng: thanh toán bằng ngân hàng,và tiền mặt
+
+pháp lý: bán hàng thuế, bảo vệ dữ lieu, điều khoản & chính sách hoàn tiền
+
+xác thực và phân quyền
+admin
+user
+supplier
+staff
+
+sản phẩm & cửa hàng riêng
+
+check out & tạo hóa đơn, thông tin khách hàng -> nhà cung cấp khi cần
+
+vận chuyển real time tích hợp carrier
+
+nofication bao gồm:
+seller
+user
+
+dashboard admin và các seller
+
+bảo mật dữ liệu
+
+kiểm thử 
+test thanh toán
+test real time vận chuyển
+load test cho điểm cuối checkout và webhook
+
