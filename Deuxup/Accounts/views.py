@@ -44,12 +44,13 @@ class loginAPIView(APIView):
                     "status" : status.HTTP_400_BAD_REQUEST,
                     "error": "Email hoặc mật khẩu không đúng.",
                 })
-        return Response("Lỗi xảy ra khi đăng nhập.", status=status.HTTP_401_UNAUTHORIZED)
+        token, _ = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key, "user": UserSerializer(auth_user).data})
     
-#Lấy thông tin tài khoản API
-class UserAPIView(APIView):
+#Xóa token API
+class MeView(APIView):
     permission_classes = [IsAuthenticated]
-    serializer_class = UserSerializer
+
     def get(self, request):
         user = request.user
         serializer = self.serializer_class(user)
@@ -57,7 +58,7 @@ class UserAPIView(APIView):
     def put(self, request):
         user = request.user
         serializer = self.serializer_class(user, data=request.data)
-        if serialize.is_valid():
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
