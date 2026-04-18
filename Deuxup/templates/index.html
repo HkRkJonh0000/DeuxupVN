@@ -1,48 +1,190 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8 />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Authentication</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        {% load static%}
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    </head>
-    <body>
-        <main class="warp">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Deuxup — nền tảng dropshipping giúp bạn tìm sản phẩm, quản lý đơn và theo dõi tăng trưởng." />
+    <title>Deuxup — Dropshipping starter</title>
 
-            <section>
-                <h2>Đăng ký</h2>
-                <form id="register-form">
-                    <label> Email <input type="email" id="email" required></label>
-                    <label> Password <input type="password" id="password" required></label>
-                    <label> Comfirm Password <input type="password" id="password_confirm" required></label>
-                    <label>Vai trò
-                        <select name="role">
-                          <option value="customer">Khách</option>
-                          <option value="seller">Người bán</option>
-                        </select>
-                      </label>
-                      <button type="submit">Đăng ký</button>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+
+<body>
+    <main class="warp home">
+        <header class="site-nav" role="banner">
+            <a class="brand" href="/home/" aria-label="Deuxup Home">
+                <span class="brand__mark" aria-hidden="true">◆</span>
+                <span class="brand__text">Deuxup</span>
+            </a>
+
+            <nav class="nav" aria-label="Điều hướng">
+                <a class="nav__link" href="#features">Tính năng</a>
+                <a class="nav__link" href="#auth">Tài khoản</a>
+                <a class="nav__link" href="/admin/">Admin</a>
+                <a class="btn btn--primary nav__cta" href="#auth">Bắt đầu</a>
+            </nav>
+        </header>
+
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero__content">
+                <p class="kicker">Dropshipping, gọn gàng và có thể mở rộng</p>
+                <h1 class="hero__title" id="hero-title">Nơi theo dõi quản lí tài khoản và phiên.</h1>
+                <p class="hero__subtitle">
+                    Deuxup giúp bạn khởi tạo luồng cơ bản: đăng ký/đăng nhập, kiểm tra phiên qua API.
+                </p>
+
+                <ul class="hero__meta" aria-label="Điểm nổi bật">
+                    <li class="hero__pill">UI dark + glass</li>
+                    <li class="hero__pill">Form sẵn sàng nối API</li>
+                    <li class="hero__pill">Template dễ mở rộng</li>
+                </ul>
+            </div>
+
+            <aside class="hero__preview" aria-label="Tóm tắt">
+                <div class="preview-card">
+                    <div class="preview-card__head">
+                        <span class="preview-card__dot preview-card__dot--a" aria-hidden="true"></span>
+                        <span class="preview-card__dot preview-card__dot--b" aria-hidden="true"></span>
+                        <span class="preview-card__dot preview-card__dot--c" aria-hidden="true"></span>
+                        <span class="preview-card__title">Bảng điều khiển (demo)</span>
+                    </div>
+                    <div class="preview-card__body">
+                        <div class="metric">
+                            <span class="metric__label">Đơn hôm nay</span>
+                            <span class="metric__value">24</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__label">Tỉ lệ chuyển đổi</span>
+                            <span class="metric__value">3.1%</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric__label">Sản phẩm nổi bật</span>
+                            <span class="metric__value">7</span>
+                        </div>
+                        <div class="spark" aria-hidden="true"></div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="section" id="features" aria-labelledby="features-title">
+            <div class="section__head">
+                <h2 class="section__title" id="features-title">Tính năng nền tảng</h2>
+                <p class="section__subtitle">Bố cục homepage sẵn để bạn gắn dữ liệu thật từ backend.</p>
+            </div>
+
+            <div class="feature-grid" role="list">
+                <article class="feature" role="listitem">
+                    <div class="feature__icon" aria-hidden="true">⚡</div>
+                    <h3 class="feature__title">Khởi động nhanh</h3>
+                    <p class="feature__text">Hero + section + CTA + footer — đủ để đi từ “template” sang “sản phẩm”.</p>
+                </article>
+                <article class="feature" role="listitem">
+                    <div class="feature__icon" aria-hidden="true">🔐</div>
+                    <h3 class="feature__title">Tài khoản</h3>
+                    <p class="feature__text">Form đăng ký/đăng nhập dùng lại style hiện có, sẵn hook JS để nối API.</p>
+                </article>
+                <article class="feature" role="listitem">
+                    <div class="feature__icon" aria-hidden="true">🧪</div>
+                    <h3 class="feature__title">API sandbox</h3>
+                    <p class="feature__text">Panel thử gọi <code>GET /api/auth/me/</code> để kiểm tra token/phiên.</p>
+                </article>
+                <article class="feature" role="listitem">
+                    <div class="feature__icon" aria-hidden="true">📦</div>
+                    <h3 class="feature__title">Dễ mở rộng</h3>
+                    <p class="feature__text">Các block độc lập: bạn có thể thêm “Products”, “Orders”, “Analytics” theo nhu cầu.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="auth" aria-labelledby="auth-title">
+            <div class="section__head">
+                <h2 class="section__title" id="auth-title">Tạo tài khoản & đăng nhập</h2>
+                <p class="section__subtitle">Dùng để thử luồng auth hiện tại. Khi API sẵn sàng, chỉ cần nối endpoint.</p>
+            </div>
+
+            <div class="auth-grid">
+                <section class="auth-card auth-card--register" aria-labelledby="register-heading">
+                    <div class="auth-card__head">
+                        <h3 id="register-heading">Đăng ký</h3>
+                        <span class="auth-card__badge">Mới</span>
+                    </div>
+                    <form id="register-form" class="auth-form" autocomplete="on">
+                        <label for="email">Email
+                            <input type="email" id="email" name="email" required placeholder="ban@email.com">
+                        </label>
+                        <label for="password">Mật khẩu
+                            <input type="password" id="password" name="password" required placeholder="••••••••" minlength="8">
+                        </label>
+                        <label for="password_confirm">Xác nhận mật khẩu
+                            <input type="password" id="password_confirm" name="password_confirm" required placeholder="Nhập lại mật khẩu" minlength="8">
+                        </label>
+                        <label for="role">Vai trò
+                            <select id="role" name="role">
+                                <option value="customer">Khách hàng</option>
+                                <option value="seller">Người bán</option>
+                            </select>
+                        </label>
+                        <button type="submit" class="btn btn--primary">Tạo tài khoản</button>
                     </form>
-                  </section>
-                  <section>
-                    <h2>Đăng nhập</h2>
-                    <form id="form-login">
-                      <label>Email <input type="email" name="email" required /></label>
-                      <label>Mật khẩu <input type="password" name="password" required /></label>
-                      <button type="submit">Đăng nhập</button>
+                </section>
+
+                <section class="auth-card auth-card--login" aria-labelledby="login-heading">
+                    <div class="auth-card__head">
+                        <h3 id="login-heading">Đăng nhập</h3>
+                        <span class="auth-card__badge">Đã có tài khoản</span>
+                    </div>
+                    <form id="form-login" class="auth-form" autocomplete="on">
+                        <label for="login-email">Email
+                            <input type="email" id="login-email" name="email" required placeholder="ban@email.com">
+                        </label>
+                        <label for="login-password">Mật khẩu
+                            <input type="password" id="login-password" name="password" required placeholder="••••••••">
+                        </label>
+                        <button type="submit" class="btn btn--secondary">Đăng nhập</button>
                     </form>
-                  </section>
-                  <section>
-                    <h2>GET /api/auth/me/</h2>
-                    <button type="button" id="btn-me">Gọi API</button>
-                    <pre id="out"></pre>
-                  </section>
-                </main>
-                <script src="{% static 'js/app.js' %}"></script>
-              </body>
-            </html>
+                </section>
+
+                <section class="auth-card auth-card--api" id="api" aria-labelledby="api-heading">
+                    <div class="auth-card__head">
+                        <h3 id="api-heading">GET /api/auth/me/</h3>
+                        <span class="auth-card__badge">API</span>
+                    </div>
+                    <div class="api-panel">
+                        <p class="api-panel__hint">Gửi kèm header <code>Authorization: Token …</code> nếu đã đăng nhập.</p>
+                        <div class="api-panel__row">
+                            <button type="button" class="btn btn--ghost" id="btn-me">Gọi API</button>
+                        </div>
+                        <pre id="out" role="status" aria-live="polite"></pre>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <footer class="site-foot">
+            <div class="site-foot__grid">
+                <div class="site-foot__brand">
+                    <div class="site-foot__logo" aria-hidden="true">◆</div>
+                    <div>
+                        <div class="site-foot__name">Deuxup</div>
+                        <div class="site-foot__tag">Dropshipping starter — Django</div>
+                    </div>
+                </div>
+                <div class="site-foot__links" aria-label="Liên kết">
+                    <a href="#features">Tính năng</a>
+                    <a href="#auth">Tài khoản</a>
+                    <a href="/admin/">Admin</a>
+                </div>
+            </div>
+            <div class="site-foot__fineprint">© {% now "Y" %} Deuxup. Built for iteration.</div>
+        </footer>
+    </main>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html> 

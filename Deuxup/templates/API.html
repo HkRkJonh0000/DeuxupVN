@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deuxup — Đăng nhập & Đăng ký</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <main class="warp auth-page">
+        <header class="auth-page__intro">
+            <div class="auth-page__logo" aria-hidden="true">◆</div>
+            <h1 class="auth-page__title">Deuxup</h1>
+            <p class="auth-page__subtitle">Tài khoản một nơi — đăng ký, đăng nhập và kiểm tra phiên qua API.</p>
+        </header>
+
+        <div class="auth-grid">
+            <section class="auth-card auth-card--register" aria-labelledby="register-heading">
+                <div class="auth-card__head">
+                    <h2 id="register-heading">Đăng ký</h2>
+                    <span class="auth-card__badge">Mới</span>
+                </div>
+                <form id="register-form" class="auth-form" autocomplete="on">
+                    <label for="email">Email
+                        <input type="email" id="email" name="email" required placeholder="ban@email.com">
+                    </label>
+                    <label for="password">Mật khẩu
+                        <input type="password" id="password" name="password" required placeholder="••••••••" minlength="8">
+                    </label>
+                    <label for="password_confirm">Xác nhận mật khẩu
+                        <input type="password" id="password_confirm" name="password_confirm" required placeholder="Nhập lại mật khẩu" minlength="8">
+                    </label>
+                    <label for="role">Vai trò
+                        <select id="role" name="role">
+                            <option value="customer">Khách hàng</option>
+                            <option value="seller">Người bán</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="btn btn--primary">Tạo tài khoản</button>
+                </form>
+            </section>
+
+            <section class="auth-card auth-card--login" aria-labelledby="login-heading">
+                <div class="auth-card__head">
+                    <h2 id="login-heading">Đăng nhập</h2>
+                    <span class="auth-card__badge">Đã có tài khoản</span>
+                </div>
+                <form id="form-login" class="auth-form" autocomplete="on">
+                    <label for="login-email">Email
+                        <input type="email" id="login-email" name="email" required placeholder="ban@email.com">
+                    </label>
+                    <label for="login-password">Mật khẩu
+                        <input type="password" id="login-password" name="password" required placeholder="••••••••">
+                    </label>
+                    <button type="submit" class="btn btn--secondary">Đăng nhập</button>
+                </form>
+            </section>
+
+            <section class="auth-card auth-card--api" aria-labelledby="api-heading">
+                <div class="auth-card__head">
+                    <h2 id="api-heading">GET /api/auth/me/</h2>
+                    <span class="auth-card__badge">API</span>
+                </div>
+                <div class="api-panel">
+                    <p class="api-panel__hint">Gửi kèm header <code>Authorization: Token …</code> nếu đã đăng nhập.</p>
+                    <div class="api-panel__row">
+                        <button type="button" class="btn btn--ghost" id="btn-me">Gọi API</button>
+                    </div>
+                    <pre id="out" role="status" aria-live="polite"></pre>
+                </div>
+            </section>
+        </div>
+
+        <footer class="auth-foot">
+            <span>Deuxup · </span><a href="/admin/">Admin</a>
+        </footer>
+    </main>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+</body>
+</html>
