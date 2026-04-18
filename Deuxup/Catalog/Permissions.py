@@ -16,8 +16,9 @@ class IsSellerOrReadOnly(BasePermission):
 
     message = "Chỉ tài khoản Seller mới có quyền."
     def has_permission(self, request, view):
-        u = request.user
-        return bool(u and u.is_authenticated and (request.method in SAFE_METHODS or getattr(u, "role", None) == "seller"))
+        if request.method in SAFE_METHODS:
+            return True
+            return IsSeller().has_permission(request,view)
 
 class IsOwnerOrAdmin(BasePermission):
     message = "Chỉ tài khoản chủ sở hữu hoặc Admin mới có quyền."
@@ -26,9 +27,9 @@ class IsOwnerOrAdmin(BasePermission):
         u = request.user
         if not u or not u.is_authenticated:
             return False
-        if getattr(u, "role", None) == User.Role.ADMIN:
+        if getattr(u, "role", None) == u.Role.ADMIN:
             return True
         profile = getattr(u, "seller_profile", None)
         if profile is None:
             return False
-        return bool(profile.id == obj.seller.id)
+        return bool(profile.id == obj.seller.pk)
