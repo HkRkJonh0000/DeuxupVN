@@ -23,6 +23,7 @@ urlpatterns = [
     path("", RedirectView.as_view(url="/home/", permanent=False)),
     path("admin/", admin.site.urls),
     path("api/", include("Accounts.urls")),
-    path("home/", TemplateView.as_view(template_name="index.html")),
+    path("api/products/", include("Products.urls")),
+    path("home/", TemplateView.as_view(template_name="index.html"), name="home"),
     path("api-docs/", TemplateView.as_view(template_name="API.html")),
 ]

@@ -53,33 +53,3 @@ class User(AbstractUser):
             self.username = self.email.split("@")[0]
         super().save(*args, **kwargs)
 
-
-class SellerProfile(models.Model):
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="seller_profile"
-    )
-    shop_name = models.CharField(max_length=120)
-    phone = models.CharField(max_length=32, blank=True)
-    address = models.CharField(max_length=255, blank=True)
-    bio = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self) -> str:
-        return f"{self.shop_name} ({self.user_id})"
-
-
-class Product(models.Model):
-    seller = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="products"
-    )
-    name = models.CharField(max_length=180)
-    description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=12, decimal_places=2)
-    stock = models.PositiveIntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self) -> str:
-        return f"{self.name} ({self.seller_id})"

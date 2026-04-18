@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework import serializers
 
-from .models import Product, SellerProfile
+from Products.models import Product, SellerProfile
 
 User = get_user_model()
 
@@ -78,8 +78,23 @@ class ProductSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("id", "seller", "created_at", "updated_at")
 
-class SellerProductSeriolizer(serializers.ModelSerializer):
+
+class SellerProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        user = createSellerProfile(request.user)
-        fields = ("")
+        fields = (
+            "id",
+            "name",
+            "description",
+            "price",
+            "stock",
+            "is_active",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = ("id", "created_at", "updated_at")
+
+    def create(self, validated_data):
+        request = self.context["request"]
+        validated_data["seller"] = request.user
+        return super().create(validated_data)
